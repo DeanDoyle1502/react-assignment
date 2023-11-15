@@ -1,28 +1,28 @@
 import React, { useState, useEffect } from "react";
 import PageTemplate from '../components/templateMovieListPage'
-import { getPopularMovies } from "../api/tmdb-api";
+import { getNowPlayingMovies } from "../api/tmdb-api";
 import { QueryClient, useQuery } from "react-query";
 import Spinner from '../components/spinner';
 import AddToMustWatchIcon from "../components/cardIcons/addToMustWatch";
 import { json } from "react-router-dom";
 
-const PopularMovies = () => {
-  const { data: popularMovies, isLoading, isError } = useQuery('popularMovies', getPopularMovies);
+const NowPlayingMovies = () => {
+  const { data: nowPlaying, isLoading, isError } = useQuery('nowPlayingMovies', getNowPlayingMovies);
 
   if (isLoading) {
     return <Spinner />
   }
 
   if (isError) {
-    return <p>Error loading Popular movies</p>;
+    return <p>Error loading Now Playing movies</p>;
   }
-console.log(popularMovies.results)
-const mustWatch = popularMovies.results.filter(m => m.mustWatch)
+console.log(nowPlaying.results)
+const mustWatch = nowPlaying.results.filter(m => m.mustWatch)
 localStorage.setItem('mustWatch', JSON.stringify(mustWatch))
 
 const addToMustWatch = (movieId) => {
   
-  const updatedMustWatchMovies = popularMovies.results.map((m) =>
+  const updatedMustWatchMovies = nowPlaying.results.map((m) =>
     m.id === movieId ? {...m, mustWatch: true} : m
   );
   
@@ -34,8 +34,8 @@ const addToMustWatch = (movieId) => {
 
   return (
     <PageTemplate
-      title='Popular Movies'
-      movies={popularMovies.results}
+      title='Now Playing'
+      movies={nowPlaying.results}
       action={(movie) => {
         return <AddToMustWatchIcon movie={movie} />
       }}
@@ -45,4 +45,4 @@ const addToMustWatch = (movieId) => {
     
   );
 };
-export default PopularMovies;
+export default NowPlayingMovies;
