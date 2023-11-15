@@ -16,33 +16,19 @@ const UpcomingMovies = () => {
   if (isError) {
     return <p>Error loading upcoming movies</p>;
   }
-
+  const mustWatch = upcomingMovies.filter(m => m.mustWatch)
+  localStorage.setItem('mustWatch', JSON.stringify(mustWatch))
   
-  // const favorites = upcomingMovies.filter(m => m.favorite)
-  // localStorage.setItem('favorites', JSON.stringify(favorites))
-
-  // const addToFavorites = (movieId) => {
-  //   const updatedMovies = upcomingMovies.map((m) =>
-  //     m.id === movieId ? { ...m, favorite: true } : m
-  //   );
-  //   setMovies(updatedMovies);
-  // };
-
-
-
-
-const mustWatch = upcomingMovies.filter(m => m.mustWatch)
-localStorage.setItem('mustWatch', JSON.stringify(mustWatch))
-
-const addToMustWatch = (movieId) => {
-  
-  const updatedMustWatchMovies = upcomingMovies.map((m) =>
+  const addToMustWatch = (movieId) => {
+    
+    const updatedMustWatchMovies = upcomingMovies.map((m) =>
     m.id === movieId ? {...m, mustWatch: true} : m
-  );
+    );
+    
+    setMovies(updatedMustWatchMovies);
+  };
   
-  setMovies(updatedMustWatchMovies);
-};
-
+  console.log(upcomingMovies)
 
 
 

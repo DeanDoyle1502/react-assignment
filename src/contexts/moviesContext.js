@@ -28,7 +28,7 @@ const MoviesContextProvider = (props) => {
     const addReview = (movie, review) => {
       setMyReviews( {...myReviews, [movie.id]: review } )
     };
-    console.log(myReviews);
+    
     
     const [mustWatch, setMustwatch] = useState ( [] )
 
@@ -42,7 +42,7 @@ const MoviesContextProvider = (props) => {
       }
       setMustwatch(newMustWatch);
     }
-    console.log(mustWatch);
+    
 
 
   return (
