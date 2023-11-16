@@ -5,6 +5,8 @@ import PageTemplate from "../components/templateMoviePage";
 import { getMovie } from '../api/tmdb-api'
 import { useQuery } from "react-query";
 import Spinner from '../components/spinner'
+import { getCredits } from "../api/tmdb-api";
+import MovieCredits from "../components/movieCredits";
 
 const MoviePage = (props) => {
   const { id } = useParams();
@@ -13,20 +15,28 @@ const MoviePage = (props) => {
     getMovie
   );
 
-  if (isLoading) {
+  const { data: cast, castError, castIsLoading, castIsError } = useQuery(
+    ["credits", { id: id }],
+    getCredits
+  );
+  
+
+  if (isLoading || castIsLoading) {
     return <Spinner />;
   }
 
-  if (isError) {
+  if (isError || castIsError) {
     return <h1>{error.message}</h1>;
   }
-
+console.log(cast)
   return (
     <>
       {movie ? (
         <>
           <PageTemplate movie={movie}>
             <MovieDetails movie={movie} />
+            <MovieCredits cast={cast.cast} />
+           
           </PageTemplate>
         </>
       ) : (
