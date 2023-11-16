@@ -5,44 +5,38 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 
-const MovieCredits = ({ cast }) => {
+const ActorDetails = ({ actor }) => {
+ 
   return (
     <div>
       <h2>Cast</h2>
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
-        {cast.map((castMember) => (
-          <Link
-            to={`/actor/${castMember.id}`}
-            key={castMember.id}
-            style={{ textDecoration: "none" }}
-          >
-            <Card style={{ maxWidth: 200, margin: 10 }}>
+       <Card style={{ maxWidth: 1000, margin: 10 }}>
               <CardMedia
                 component="img"
-                height="200"
-                image={`https://image.tmdb.org/t/p/w500/${castMember.profile_path}`}
-                alt={castMember.name}
+                height="400"
+                image={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`}
+                alt={actor.name}
               />
               <CardContent>
                 <Typography variant="h6" component="p">
-                  {castMember.name}
+                  {actor.name}
                 </Typography>
                 <Typography variant="body2" component="p">
-                  Character: {castMember.character}
+                  Birthday: {actor.birthday}
                 </Typography>
                 <Typography variant="body2" component="p">
-                  Gender: {castMember.gender === 2 ? "Male" : "Female"}
+                  Gender: {actor.gender === 2 ? "Male" : "Female"}
                 </Typography>
                 <Typography variant="body2" component="p">
-                  Known for Department: {castMember.known_for_department}
+                  Known for Department: {actor.known_for_department}
+                </Typography>
+                <Typography variant="body2" component="p">
+                  Biography: {actor.biography}
                 </Typography>
               </CardContent>
             </Card>
-          </Link>
-        ))}
-      </div>
     </div>
   );
 };
 
-export default MovieCredits;
+export default ActorDetails;

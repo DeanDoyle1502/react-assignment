@@ -6,7 +6,7 @@ import { getMovie } from '../api/tmdb-api'
 import { useQuery } from "react-query";
 import Spinner from '../components/spinner'
 import { getCredits } from "../api/tmdb-api";
-import MovieCredits from "../components/movieCredits";
+import MovieCredits from "../components/MovieCredits";
 
 const MoviePage = (props) => {
   const { id } = useParams();
@@ -15,7 +15,7 @@ const MoviePage = (props) => {
     getMovie
   );
 
-  const { data: cast, castError, castIsLoading, castIsError } = useQuery(
+  const { data: cast, castError, isLoading: castIsLoading, castIsError } = useQuery(
     ["credits", { id: id }],
     getCredits
   );
@@ -28,7 +28,7 @@ const MoviePage = (props) => {
   if (isError || castIsError) {
     return <h1>{error.message}</h1>;
   }
-console.log(cast)
+
   return (
     <>
       {movie ? (
