@@ -1,70 +1,65 @@
-# Getting Started with Create React App
+# Assignment 1 - ReactJS app.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Name: [Dean Doyle]
 
-## Available Scripts
+## Overview.
 
-In the project directory, you can run:
+This project involes building an movie information app using the TMDB api to pull information from 
 
-### `npm start`
+### Features.
+[ A bullet-point list of the __new features__ you added to the Movies Fan app (and any modifications to existing features) .]
+ 
++ Feature 1
+Static end points - Upcoming movies, Top rated movies and popular movies.
++ Feature 2
+Parameterised endpoints - Get Movie credits by id, get actor by id, get actor credits by id 
++ Feature 3
+Pagination and dark mode added
++ Feature 4
+connected pages movie page displays actors, actors page displays movies which are sorted by top ten based on amount of votes 
++ Feature 5
+Save favourites page for films that are already out, add to must watch page for upcoming movies.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Setup requirements.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+standerd set up
 
-### `npm test`
+## API endpoints.
+-fetchs popular movies 
+`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+-fetches now playing movies 
+`https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
 
-### `npm run build`
+-fetches top rated movies
+`https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+-fetches the actors in the movies based on the movie id
+`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+-fecthes the actors information based on id
+`https://api.themoviedb.org/3/person/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+-fetches the actors movie credits absed on the actors id 
+`https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`
 
-### `npm run eject`
+## Routing.
+            Standard routes
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+  <Route path="/movies/upcoming" element={<UpcomingMovies />} />
+          <Route path="/movies/popular" element={<PopularMovies />} />
+          <Route path="/movies/nowPlaying" element={<NowPlayingMovies />} /> 
+          <Route path="/movies/topRated" element={<TopRatedMovies />} />
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+          --routes based on ids-- 
+          
+          <Route path="/reviews/:id" element={ <MovieReviewPage /> } /> 
+          <Route path="/movies/:id" element={<MoviePage />} />
+          <Route path="/actor/:id" element={<ActorDetailsPage />} />
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+          --routes to specific pages--
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+          <Route path="/reviews/form" element={ <AddMovieReviewPage /> } />
+          <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
+          <Route path="/movies/mustWatch" element={ <MustWatchPage /> } />
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
