@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState} from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Navigate, Routes } from "react-router-dom";
 import HomePage from "./pages/homePage";
@@ -16,6 +16,12 @@ import PopularMovies from "./pages/popularMoviesPage";
 import NowPlayingMovies from "./pages/nowPlayingPage";
 import TopRatedMovies from "./pages/topRatedMoviesPage";
 import ActorDetailsPage from "./pages/actorDetailsPage";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import FormControl from "@mui/material/FormControl";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import { Switch } from "@mui/material"
 
 
 const queryClient = new QueryClient({
@@ -30,10 +36,46 @@ const queryClient = new QueryClient({
 
 
 const App = () => {
+
+  const [toggleDarkMode, setToggleDarkMode] = useState(true);
+
+  const toggleDarkTheme = () => {
+    setToggleDarkMode(!toggleDarkMode);
+  };
+
+  const darkTheme = createTheme({
+    palette: {
+      mode: toggleDarkMode ? 'dark' : 'light', 
+      primary: {
+        main: '#90caf9',
+        
+      },
+      secondary: {
+        main: '#5aafd1',
+
+      },
+
+    },
+  });
   return (
+
+    <ThemeProvider theme={darkTheme}>
+    <CssBaseline />
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <SiteHeader />
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'left', paddingLeft: 20 }}>
+        <FormControl component="fieldset">
+        <FormGroup aria-label="position" row>
+        <FormControlLabel
+          value="end"
+          control= {<Switch checked={toggleDarkMode} onChange={toggleDarkTheme}  />}
+          label="Dark mode"
+          labelPlacement="end"
+        />
+        </FormGroup>
+        </FormControl>
+        </div>
         <MoviesContextProvider>
         <Routes>
           <Route path="/movies/upcoming" element={<UpcomingMovies />} />
@@ -53,6 +95,7 @@ const App = () => {
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
+    </ThemeProvider>
   );
 };
 

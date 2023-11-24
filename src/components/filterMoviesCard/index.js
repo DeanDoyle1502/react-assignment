@@ -18,7 +18,7 @@ const formControl =
   {
     margin: 1,
     minWidth: 220,
-    backgroundColor: "rgb(255, 255, 255)"
+    backgroundColor: "rgb(80, 80, 80)"
   };
 
 export default function FilterMoviesCard(props) {

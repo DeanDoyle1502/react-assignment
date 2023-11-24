@@ -28,7 +28,7 @@ const UpcomingMovies = () => {
     setMovies(updatedMustWatchMovies);
   };
   
-  console.log(upcomingMovies)
+  
 
 
 
