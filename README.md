@@ -19,6 +19,7 @@ Pagination and dark mode added
 connected pages movie page displays actors, actors page displays movies which are sorted by top ten based on amount of votes 
 + Feature 5
 Save favourites page for films that are already out, add to must watch page for upcoming movies.
++ caching done on entire app pages
 
 ## Setup requirements.
 
